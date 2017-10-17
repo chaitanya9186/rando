@@ -26,6 +26,10 @@ app.get('/facebook', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
 app.post('/facebook', (req, res, next) => {
   req.method = 'GET';
   next();
@@ -34,7 +38,8 @@ app.post('/facebook', (req, res, next) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+  res.redirect('/');
+  // res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 const port = process.env.PORT || 5000;
