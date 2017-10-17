@@ -4,15 +4,6 @@ const generatePassword = require('password-generator');
 
 const app = express();
 
-app.get('/facebook', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
-
-app.post('/facebook', (req, res, next) => {
-  req.method = 'GET';
-  next();
-});
-
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -29,6 +20,15 @@ app.get('/api/passwords', (req, res) => {
   res.json(passwords);
 
   console.log(`Sent ${count} passwords`);
+});
+
+app.get('/facebook', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
+app.post('/facebook', (req, res, next) => {
+  req.method = 'GET';
+  next();
 });
 
 // The "catchall" handler: for any request that doesn't
